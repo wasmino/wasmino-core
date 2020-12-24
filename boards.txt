@@ -1,0 +1,19 @@
+# See: http://code.google.com/p/arduino/wiki/Platforms
+
+menu.cpu=Processor
+
+##############################################################
+
+browserino.name=Browserino
+browserino.upload.using=dumpurlprog
+browserino.upload.protocol=usb
+browserino.upload.tool=dumpurl
+browserino.upload.maximum_size=4096
+browserino.build.mcu=attiny85
+browserino.build.f_cpu=16500000L
+browserino.build.board=browserino
+browserino.build.core=wasm
+browserino.build.variant=browserino
+browserino.upload.wait_for_upload_port=false
+browserino.upload.use_1200bps_touch=false
+browserino.upload.disable_flushing=false

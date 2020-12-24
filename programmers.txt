@@ -1,0 +1,5 @@
+urldumpprog.name=URL Dump
+urldumpprog.communication=usb
+urldumpprog.protocol=urldump
+urldumpprog.program.tool=echo
+urldumpprog.program.extra_params=
