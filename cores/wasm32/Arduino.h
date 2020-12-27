@@ -7,6 +7,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "HardwareSerial.h"
+
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -53,10 +55,6 @@ extern "C"{
 #define degrees(rad) ((rad)*RAD_TO_DEG)
 #define sq(x) ((x)*(x))
 
-#define clockCyclesPerMicrosecond() ( F_CPU / 1000000L )
-#define clockCyclesToMicroseconds(a) ( (a) / clockCyclesPerMicrosecond() )
-#define microsecondsToClockCycles(a) ( (a) * clockCyclesPerMicrosecond() )
-
 #define lowByte(w) ((uint8_t) ((w) & 0xff))
 #define highByte(w) ((uint8_t) ((w) >> 8))
 
@@ -65,6 +63,8 @@ extern "C"{
 #define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
 #define bitToggle(value, bit) ((value) ^= (1UL << (bit)))
 #define bitWrite(value, bit, bitvalue) ((bitvalue) ? bitSet(value, bit) : bitClear(value, bit))
+
+#define digitalPinToInterrupt(pin) (pin)
 
 // avr-libc defines _NOP() since 1.6.2
 #ifndef _NOP
@@ -81,19 +81,20 @@ typedef uint8_t byte;
 void pinMode(uint8_t pin, uint8_t mode);
 void digitalWrite(uint8_t pin, uint8_t val);
 int digitalRead(uint8_t pin);
-// int analogRead(uint8_t pin);
-// void analogReference(uint8_t mode);
-// void analogWrite(uint8_t pin, int val);
+int analogRead(uint8_t pin);
+void analogReference(uint8_t mode);
+void analogWrite(uint8_t pin, int val);
 
 unsigned long millis(void);
 unsigned long micros(void);
-// void delay(unsigned long ms);
-// void delayMicroseconds(unsigned int us);
-// unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
-// unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout);
+void delay(unsigned long ms);
+void delayMicroseconds(unsigned int us);
 
-// void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val);
-// uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder);
+void attachInterrupt(uint8_t intr, void (*isr)(), int mode);
+void detachInterrupt(uint8_t intr);
+
+void interrupts();
+void noInterrupts();
 
 void setup(void);
 void loop(void);

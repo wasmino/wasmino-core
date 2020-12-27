@@ -1,5 +1,5 @@
-urldumpprog.name=URL Dump
-urldumpprog.communication=usb
-urldumpprog.protocol=urldump
-urldumpprog.program.tool=echo
-urldumpprog.program.extra_params=
+gist.name=GitHub Gist
+gist.communication=http
+gist.protocol=gist
+gist.program.tool={runtime.tools.gist.path}/gist
+gist.program.extra_params=-t 60 --base64

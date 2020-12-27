@@ -4,17 +4,19 @@
 # For more info:
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification
 
-name=Browserino
-version=1.5.4
+package=wasmino
 
-# AVR compile variables
+name=Wasmino Virtual Boards
+version=0.0.1
+
+# compile variables
 # --------------------- 
 
 # Default "compiler.path" is correct, change only if you want to overidde the initial value
 compiler.path={runtime.tools.wasi-sdk.path}/bin/
 
 compiler.c.cmd=clang
-compiler.c.flags=-c -Os --target=wasm32 --sysroot={runtime.tools.wasi-sdk.path}/share/wasi-sysroot
+compiler.c.flags=-x c -c -Os --target=wasm32 --sysroot={runtime.tools.wasi-sdk.path}/share/wasi-sysroot
 
 compiler.cpp.cmd=clang++
 compiler.cpp.flags=-c -Os --target=wasm32 --sysroot={runtime.tools.wasi-sdk.path}/share/wasi-sysroot
@@ -23,7 +25,7 @@ compiler.ar.cmd=ar
 compiler.ar.flags=rcs
 
 compiler.ld.cmd=wasm-ld
-compiler.ld.flags=--no-entry --export-all
+compiler.ld.flags=-m wasm32 -L{runtime.tools.wasi-sdk.path}/share/wasi-sysroot/lib/wasm32-wasi
 #--allow-undefined-file=
 
 compiler.echo.cmd=echo
@@ -37,10 +39,10 @@ build.extra_flags=
 # --------------------
 
 ## Compile c files
-recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -D__wasi__ -DARDUINO={runtime.ide.version} -DF_CPU={build.f_cpu} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} {build.compiler.c.flags} -D__wasi__ -DARDUINO={runtime.ide.version} -DF_CPU={build.f_cpu} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 
 ## Compile c++ files
-recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -D__wasi__ -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {build.compiler.cpp.flags} -D__wasi__ -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 
 ## Compile S files
 recipe.S.o.pattern={compiler.echo.cmd} "cannot compile .S file"
@@ -49,13 +51,10 @@ recipe.S.o.pattern={compiler.echo.cmd} "cannot compile .S file"
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} "{archive_file_path}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.ld.cmd}" {compiler.ld.flags} -o "{build.path}/{build.project_name}.wasm" {object_files} "{archive_file_path}" "-L{build.path}"
+recipe.c.combine.pattern="{compiler.path}{compiler.ld.cmd}" {compiler.ld.flags} {build.compiler.ld.flags} "-L{build.path}" {runtime.tools.wasi-sdk.path}/share/wasi-sysroot/lib/wasm32-wasi/crt1.o "{archive_file_path}" {object_files} -lm -lc -lc++ -lc++abi {runtime.tools.wasi-sdk.path}/lib/clang/11.0.0/lib/wasi/libclang_rt.builtins-wasm32.a -o "{build.path}/{build.project_name}.raw.wasm"
 
-## Create eeprom
-recipe.objcopy.eep.pattern={compiler.echo.cmd} "Skipping EEPROM creation"
-
-## Create hex
-recipe.objcopy.hex.pattern={compiler.echo.cmd} "Skipping HEX creation"
+## Create Optimized wasm
+recipe.objcopy.wasm.pattern={runtime.tools.binaryen.path}/bin/wasm-opt -Os {build.compiler.binaryen_wasm_opt.flags} "{build.path}/{build.project_name}.raw.wasm" -o "{build.path}/{build.project_name}.wasm"
 
 ## Compute size
 recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.wasm"
@@ -63,15 +62,17 @@ recipe.size.regex=^(?:DATA|Total)\s+([0-9]+).*
 recipe.size.regex.data=^(?:Total)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:Total)\s+([0-9]+).*
 
+## Save hex
+recipe.output.tmp_file={build.project_name}.wasm
+recipe.output.save_file={build.project_name}.{build.variant}.wasm
+
 # USB Default Flags
 # Default blank usb manufacturer will be filled it at compile time
 # - from numeric vendor ID, set to Unknown otherwise
 build.usb_manufacturer=
 build.usb_flags=
 
-tools.dumpurl.cmd.path=
-
-tools.dumpurl.upload.params.verbose=
-tools.dumpurl.upload.params.quiet=
-
-tools.dumpurl.upload.pattern="echo" "{build.path}/{build.project_name}.wasm"
+tools.gist.cmd.path={runtime.tools.gist.path}/gist
+tools.gist.upload.params.verbose=
+tools.gist.upload.params.quiet=
+tools.gist.upload.pattern="{cmd.path}" -t 60 --base64 -f wasmino.wasm.b64 "{build.path}/{build.project_name}.wasm"

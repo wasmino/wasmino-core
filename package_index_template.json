@@ -1,0 +1,85 @@
+{
+	"packages": [
+		{
+			"name": "wasmino",
+			"maintainer": "Wasmino",
+			"websiteURL": "https://github.com/wasmino",
+			"email": "support@example.com",
+			"help": {
+				"online": "https://github.com/wasmino"
+			},
+			"platforms": [
+				{
+					"name": "Wasmino Virtual Boards",
+					"architecture": "wasm32",
+					"version": "",
+					"category": "wasm32",
+					"url": "",
+					"archiveFileName": "",
+					"help": {
+						"online": "https://github.com/wasmino"
+					},
+					"boards": [],
+					"toolsDependencies": [
+						{
+							"packager": "wasmino",
+							"name": "wasi-sdk",
+							"version": "12.0"
+						},
+						{
+							"packager": "wasmino",
+							"name": "gist",
+							"version": "0.0.3"
+						},
+						{
+							"packager": "wasmino",
+							"name": "binaryen",
+							"version": "97"
+						}
+					]
+				}
+			],
+			"tools": [
+				{
+					"name": "wasi-sdk",
+					"version": "12.0",
+					"systems": [
+						{
+							"host": "i686-mingw32",
+							"url": "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-mingw.tar.gz",
+							"archiveFileName": "wasi-sdk-12.0-mingw.tar.gz",
+							"checksum": "SHA-256:ac6a96bab41eb1979eda2fa35e1d6d701588feb4131a76497928fb90769d76e0",
+							"size": "141815922"
+						}
+					]
+				},
+				{
+					"name": "gist",
+					"version": "0.0.3",
+					"systems": [
+						{
+							"host":"i686-mingw32",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-windows-386.zip",
+							"archiveFileName": "gist-windows-386.zip",
+							"checksum": "SHA-256:96d93e0a7177d6386c71be6b7b531cd0d35d587749e4db7690b72ce0325493a1",
+							"size": "3581427"
+						}
+					]
+				},
+				{
+					"name": "binaryen",
+					"version": "97",
+					"systems": [
+						{
+							"host":"i686-mingw32",
+							"url": "https://github.com/WebAssembly/binaryen/releases/download/version_97/binaryen-version_97-x86_64-windows.tar.gz",
+							"archiveFileName": "binaryen-version_97-x86_64-windows.tar.gz",
+							"checksum": "SHA-256:0c2dcba2ac3d834e5f09f2be83cbe693b71bde3f3d2b5eee1b10281daaacdeb8",
+							"size": "27130776"
+						}
+					]
+				}
+			]
+		}
+	]
+}

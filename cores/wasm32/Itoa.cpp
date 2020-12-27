@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "Itoa.h"
 
+static char num[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+
 static void strreverse(char *begin, char *end)
 {
 	char aux;
@@ -11,8 +13,6 @@ static void strreverse(char *begin, char *end)
 
 char *ltoa(long value, char *str, int base)
 {
-	static char num[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-
 	char *wstr = str;
 	int sign;
 
@@ -49,8 +49,6 @@ char *itoa(int value, char *str, int base)
 
 char *ultoa(unsigned long value, char *str, int base)
 {
-	static char num[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-
 	char *wstr = str;
 
 	// Validate base

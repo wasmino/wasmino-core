@@ -47,42 +47,36 @@ void HardwareSerial::end()
 
 int HardwareSerial::available(void)
 {
-	return rxBufferSize - rxBufferCursor;
+	return INT32_MAX;
 }
 
 int HardwareSerial::peek(void)
 {
-	if (rxBufferCursor == rxBufferSize) {
-		return -1;
-	}
-	return rxBuffer[rxBufferCursor];
+	int c = getc(stdin);
+	ungetc(c, stdin);
+	return c;
 }
 
 int HardwareSerial::read(void)
 {
-	if (rxBufferCursor == rxBufferSize) {
-		return -1;
-	}
-	return rxBuffer[rxBufferCursor++];
+	return getc(stdin);
 }
 
 int HardwareSerial::availableForWrite(void)
 {
-	return SERIAL_TX_BUFFER_SIZE - txBufferCursor;
+	return INT32_MAX;
 }
 
 void HardwareSerial::flush()
 {
 	// flush to stdout.
-	_write(1, txBuffer, SERIAL_TX_BUFFER_SIZE - txBufferCursor);
-	txBufferCursor = 0;
+	fflush(stdout);
 }
 
 size_t HardwareSerial::write(uint8_t c)
 {
-	if (txBufferCursor == SERIAL_TX_BUFFER_SIZE || txBuffer[txBufferCursor] == '\n') {
-		flush();
-	}
-	txBuffer[txBufferCursor++] = c;
+	putc(c, stdout);
 	return 1;
 }
+
+HardwareSerial Serial;

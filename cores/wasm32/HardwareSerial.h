@@ -64,17 +64,8 @@
 
 class HardwareSerial : public Stream
 {
-private:
-	uint8_t txBuffer[SERIAL_TX_BUFFER_SIZE];
-	uint8_t rxBuffer[SERIAL_RX_BUFFER_SIZE];
-	unsigned int txBufferCursor;
-	unsigned int rxBufferCursor;
-	unsigned int rxBufferSize;
 public:
-	inline HardwareSerial(
-		volatile uint8_t *ubrrh, volatile uint8_t *ubrrl,
-		volatile uint8_t *ucsra, volatile uint8_t *ucsrb,
-		volatile uint8_t *ucsrc, volatile uint8_t *udr);
+	inline HardwareSerial(){};
 	void begin(unsigned long baud) { begin(baud, SERIAL_8N1); }
 	void begin(unsigned long, uint8_t);
 	void end();
@@ -92,23 +83,8 @@ public:
 	operator bool() { return true; }
 };
 
-#if defined(UBRRH) || defined(UBRR0H)
-extern HardwareSerial Serial;
-#define HAVE_HWSERIAL0
-#endif
-#if defined(UBRR1H)
-extern HardwareSerial Serial1;
-#define HAVE_HWSERIAL1
-#endif
-#if defined(UBRR2H)
-extern HardwareSerial Serial2;
-#define HAVE_HWSERIAL2
-#endif
-#if defined(UBRR3H)
-extern HardwareSerial Serial3;
-#define HAVE_HWSERIAL3
-#endif
-
 extern void serialEventRun(void) __attribute__((weak));
+
+extern HardwareSerial Serial;
 
 #endif
