@@ -1,10 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   release:
     types: [ created ]
 
@@ -16,7 +12,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get Release Info
-        if: github.event_name == 'release'
         id: get_release
         uses: bruceadams/get-release@v1.2.2
         env:
