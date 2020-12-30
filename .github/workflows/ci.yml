@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ created ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Release Info
+        if: github.event_name == 'release'
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          
+      - name: Build Package
+        run: |
+          python3 package.py --package=package.zip --package-url https://github.com/wasmino/wasmino-core/releases/download/${{ steps.get_release.outputs.tag_name }}/package.zip
+
+      - name: Upload Package ZIP
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: package.zip
+          asset_name: package.zip
+          asset_content_type: application/zip
+
+      - name: Upload Package Index
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: package_wasmino_index.json
+          asset_name: package_wasmino_index.json
+          asset_content_type: application/json
