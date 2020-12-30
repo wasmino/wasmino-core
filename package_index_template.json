@@ -29,7 +29,7 @@
 						{
 							"packager": "wasmino",
 							"name": "gist",
-							"version": "0.0.3"
+							"version": "0.0.4"
 						},
 						{
 							"packager": "wasmino",
@@ -69,28 +69,28 @@
 				},
 				{
 					"name": "gist",
-					"version": "0.0.3",
+					"version": "0.0.4",
 					"systems": [
 						{
 							"host":"i686-mingw32",
-							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-windows-386.zip",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.4/gist-windows-386.zip",
 							"archiveFileName": "gist-windows-386.zip",
-							"checksum": "SHA-256:96d93e0a7177d6386c71be6b7b531cd0d35d587749e4db7690b72ce0325493a1",
-							"size": "3581427"
+							"checksum": "SHA-256:25bf388a25e11da0b1b9c6dfa374dcdf0ddccf3905afebe4a154f34d30304558",
+							"size": "4413702"
 						},
 						{
 							"host": "x86_64-linux-gnu",
-							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-linux-amd64.tar.gz",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.4/gist-linux-amd64.tar.gz",
 							"archiveFileName": "gist-linux-amd64.tar.gz",
-							"checksum": "SHA-256:5705ce5e93c626b17b8ee17b35a39685a78066c8b01a8121393cc91dc4b481da",
-							"size": "3765718"
+							"checksum": "SHA-256:770c2a827f0cca11b6345dc0c00e8b5ab24db8a2bf616a5a6f578253dc31024a",
+							"size": "4654660"
 						},
 						{
 							"host": "x86_64-apple-darwin",
-							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-darwin-amd64.tar.gz",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.4/gist-darwin-amd64.tar.gz",
 							"archiveFileName": "gist-darwin-amd64.tar.gz",
-							"checksum": "SHA-256:894fb5fbd55ca5b619eb21ed3d7577d09ca147c2bdc7b470477f7cdaf2e06692",
-							"size": "3674730"
+							"checksum": "SHA-256:bb8366250a8ab37a6501378bb87bbe2cec1d80866627f2b19d1d4e203f972496",
+							"size": "4559367"
 						}
 					]
 				},

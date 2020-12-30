@@ -75,4 +75,4 @@ build.usb_flags=
 tools.gist.cmd.path={runtime.tools.gist.path}/gist
 tools.gist.upload.params.verbose=
 tools.gist.upload.params.quiet=
-tools.gist.upload.pattern="{cmd.path}" -t 60 --base64 -f wasmino.wasm.b64 "{build.path}/{build.project_name}.wasm"
+tools.gist.upload.pattern="{cmd.path}" -t 60 --base64 -f {build.project_name}.{build.variant}.wasm.b64 "{build.path}/{build.project_name}.wasm" "--format=https://demo.wasmino.org/#src=gist://{{.ID}}"
