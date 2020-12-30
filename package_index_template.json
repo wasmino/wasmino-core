@@ -50,6 +50,20 @@
 							"archiveFileName": "wasi-sdk-12.0-mingw.tar.gz",
 							"checksum": "SHA-256:ac6a96bab41eb1979eda2fa35e1d6d701588feb4131a76497928fb90769d76e0",
 							"size": "141815922"
+						},
+						{
+							"host": "x86_64-linux-gnu",
+							"url": "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-linux.tar.gz",
+							"archiveFileName": "wasi-sdk-12.0-linux.tar.gz",
+							"checksum": "SHA-256:fa47694d75bf6fce98fbe7927193298b25ee03dade27fca453d7dd530378973a",
+							"size": "49511675"
+						},
+						{
+							"host": "x86_64-apple-darwin",
+							"url": "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-12/wasi-sdk-12.0-macos.tar.gz",
+							"archiveFileName": "wasi-sdk-12.0-macos.tar.gz",
+							"checksum": "SHA-256:8ee25f9c3fde618feea5c57adad385152626784b6b6b52fb563e5ed832bf53ef",
+							"size": "45090499"
 						}
 					]
 				},
@@ -63,6 +77,20 @@
 							"archiveFileName": "gist-windows-386.zip",
 							"checksum": "SHA-256:96d93e0a7177d6386c71be6b7b531cd0d35d587749e4db7690b72ce0325493a1",
 							"size": "3581427"
+						},
+						{
+							"host": "x86_64-linux-gnu",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-linux-amd64.tar.gz",
+							"archiveFileName": "gist-linux-amd64.tar.gz",
+							"checksum": "SHA-256:5705ce5e93c626b17b8ee17b35a39685a78066c8b01a8121393cc91dc4b481da",
+							"size": "3765718"
+						},
+						{
+							"host": "x86_64-apple-darwin",
+							"url": "https://github.com/gyf304/go-gist/releases/download/v0.0.3/gist-darwin-amd64.tar.gz",
+							"archiveFileName": "gist-darwin-amd64.tar.gz",
+							"checksum": "SHA-256:894fb5fbd55ca5b619eb21ed3d7577d09ca147c2bdc7b470477f7cdaf2e06692",
+							"size": "3674730"
 						}
 					]
 				},
@@ -76,6 +104,20 @@
 							"archiveFileName": "binaryen-version_97-x86_64-windows.tar.gz",
 							"checksum": "SHA-256:0c2dcba2ac3d834e5f09f2be83cbe693b71bde3f3d2b5eee1b10281daaacdeb8",
 							"size": "27130776"
+						},
+						{
+							"host": "x86_64-linux-gnu",
+							"url": "https://github.com/WebAssembly/binaryen/releases/download/version_97/binaryen-version_97-x86_64-linux.tar.gz",
+							"archiveFileName": "binaryen-version_97-x86_64-linux.tar.gz",
+							"checksum": "SHA-256:7eb18a35a6c91d49da42b775293c14945eecc2ea125dafbd4fba83cdf326e8e6",
+							"size": "31756118"
+						},
+						{
+							"host": "x86_64-apple-darwin",
+							"url": "https://github.com/WebAssembly/binaryen/releases/download/version_97/binaryen-version_97-x86_64-macos.tar.gz",
+							"archiveFileName": "binaryen-version_97-x86_64-macos.tar.gz",
+							"checksum": "SHA-256:e34f3265d5d6b5fb3e76eaaa5f7304d51365a525ddf2c9671228cc1675906e99",
+							"size": "3767730"
 						}
 					]
 				}
